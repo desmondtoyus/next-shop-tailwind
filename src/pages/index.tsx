@@ -22,7 +22,7 @@ const Home: FC<Props> = ({ title }) => {
       <main className="px-6 py-4">
         <Title>
           Next 
-          shop4</Title>
+          shop45</Title>
       </main>
     </>
   );
