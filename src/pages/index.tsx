@@ -20,9 +20,7 @@ const Home: FC<Props> = ({ title }) => {
   return (
     <>
       <main className="px-6 py-4">
-        <Title>
-          Next 
-          shop45</Title>
+        <Title>Next shop450</Title>
       </main>
     </>
   );
