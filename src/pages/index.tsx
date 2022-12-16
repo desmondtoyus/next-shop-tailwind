@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import { Title } from '@/components/common/Title';
+import { Button } from '@/components/ui/Buttons';
 
 export interface Props {
   title: string;
@@ -21,6 +22,7 @@ const Home: FC<Props> = ({ title }) => {
     <>
       <main className="px-6 py-4">
         <Title>Next shop450</Title>
+        <Button cta="Order Now" />
       </main>
     </>
   );
