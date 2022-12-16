@@ -1,5 +1,5 @@
-import { Title } from '@/components/common/Title';
 import React, { FC } from 'react';
+import { Title } from '@/components/common/Title';
 
 export interface Props {
   title: string;
