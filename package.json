@@ -83,9 +83,12 @@
     }
   },
   "lint-staged": {
-    "**/*.{js,jsx,ts,tsx,md,mdx,json,css,scss}": [
-      "eslint --ignore-path .gitignore \"src/**/*.+(ts|js|tsx|jsx)\" --fix",
-      "prettier --ignore-path .gitignore \"src/**/*.+(ts|js|tsx|jsx)\" --write --ignore-unknown"
+    "**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write --ignore-unknown"
+    ],
+    "**/*.{md,mdx,json,css,scss}": [
+      "prettier --write --ignore-unknown"
     ]
   }
 }
