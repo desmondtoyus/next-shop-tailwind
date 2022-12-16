@@ -1,0 +1,32 @@
+{
+  "title": "Lovevery | Learning Through Play for Your Child's Developing Brain",
+  "titleTemplate": "%s - Lovevery",
+  "description": "Feel confident you're giving your child the best toys for their developing brain. See our award-winning Montessori-inspired toys designed for each learning stage.",
+  "additionalLinkTags": [
+    {
+      "rel": "icon",
+      "href": "//cdn.shopify.com/s/files/1/2386/2119/t/12/assets/favicon.ico"
+    }
+  ],
+  "openGraph": {
+    "title": "Lovevery | Learning Through Play for Your Child's Developing Brain",
+    "description": "Feel confident you're giving your child the best toys for their developing brain. See our award-winning Montessori-inspired toys designed for each learning stage.",
+    "type": "website",
+    "locale": "en_IE",
+    "url": "https://lovevery.com",
+    "site_name": "Lovevery",
+    "images": [
+      {
+        "url": "/card.png",
+        "width": 800,
+        "height": 600,
+        "alt": "Lovevery"
+      }
+    ]
+  },
+  "twitter": {
+    "handle": "@Lovevery",
+    "site": "@Lovevery",
+    "cardType": "summary_large_image"
+  }
+}
