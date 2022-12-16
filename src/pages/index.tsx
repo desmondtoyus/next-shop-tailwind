@@ -1,3 +1,4 @@
+import { Title } from '@/components/common/Title';
 import React, { FC } from 'react';
 
 export interface Props {
@@ -19,8 +20,10 @@ const Home: FC<Props> = ({ title }) => {
   console.log('title: ', title);
   return (
     <>
-      <main>
-        <h1>Next shop</h1>
+      <main className='px-6 py-4'>
+        <Title>
+        Next shop
+          </Title>
       </main>
     </>
   );
