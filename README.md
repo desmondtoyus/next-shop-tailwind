@@ -48,6 +48,7 @@ import favicon from '@/public/favicon.png';
 ```
 
 ## Fix for Tailwind Linting Issue
+
 Make sure to install PostCSS Language Support, extension found in the VSCODE.
 
 ## Cypress Example
@@ -56,3 +57,9 @@ Make sure to install PostCSS Language Support, extension found in the VSCODE.
 - https://docs.cypress.io/api/commands/children#Selector
 
 ## License
+
+### Strapi Products api
+
+http://localhost:1337/api/products
+
+Authorization cd4c9dbd3b10f956f708cef81827a7752bec01a6ffc3aea4cf67f3f88f7545676aabfc4a60fc8052bf845d0c7a27e0ba17f2e80182b1d30302132eb6d5b373c0505b0f058e2fdf0db27e6427572a585184d49c55c37fce89eaaf180f9afd1c3afc3e36d5216722dfe10a6e6cb37a42b11dc43d501e125ee71fbc0e08a6309fa4

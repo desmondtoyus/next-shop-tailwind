@@ -4,6 +4,7 @@ const nextConfig = {
   swcMinify: true,
   images: {
     domains: [
+      'localhost',
       'cdn.builder.io',
       'cdn.shopify.com',
       'seal-alaskaoregonwesternwashington.bbb.org',
