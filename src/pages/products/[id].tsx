@@ -1,4 +1,4 @@
-import { PRODUCTS } from '@/constants';
+import { getProduct, getProducts } from '@/helper';
 import {
   GetStaticPathsContext,
   GetStaticPathsResult,
@@ -10,29 +10,34 @@ import React, { FC } from 'react';
 
 export interface ProductProp {
   id: number;
-  title: string;
-  image_src: string;
+  name: string;
+  image_url: string;
   description: string;
 }
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
+  const { data } = await getProducts();
   return {
-    paths: [],
+    paths: data.map(({ id }: { id: number }) => ({
+      params: { id: String(id) },
+    })),
     fallback: 'blocking',
   };
 }
 
 export async function getStaticProps({ params }: GetStaticPropsContext) {
   const { id } = params || {};
-  const product = PRODUCTS.find((product) => product.id === Number(id));
+  const { data = {} } = (await getProduct(Number(id))) || {};
+  const { attributes } = data;
   return {
     props: {
-      ...product,
+      id: data?.id || null,
+      ...attributes,
     },
   };
 }
 
-const Product: FC<ProductProp> = ({ id, title, image_src, description }) => {
+const Product: FC<ProductProp> = ({ id, name, image_url, description }) => {
   return (
     <div className="p-2 max-w-3xl">
       <Link href="/" className="text-blue-300">
@@ -41,8 +46,8 @@ const Product: FC<ProductProp> = ({ id, title, image_src, description }) => {
       </Link>
       {id ? (
         <>
-          <h4 className="text-2xl pb-3">{`${id}. ${title}`}</h4>
-          <Image src={image_src} width="100" height="100" alt={title} />
+          <h4 className="text-2xl pb-3">{`${id}. ${name}`}</h4>
+          <Image src={image_url} width="100" height="100" alt={name} />
           <p>{description}</p>
         </>
       ) : (
