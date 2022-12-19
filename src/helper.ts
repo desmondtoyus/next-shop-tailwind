@@ -1,17 +1,21 @@
 import { API_ENDPOINT } from './constants';
 
-const fetcher = async (url: string) => {
-  try {
-    const response = await fetch(url);
-    console.log(`Status: ${response.status}`);
-    if (response.status === 200) {
-      return response.json();
-    }
-    return null;
-  } catch (error) {
-    console.error(`Caught Error: ${error}`);
-    return null;
+export class ErrorHandler extends Error {
+  status: number | null;
+  constructor(url: string, status: number | null) {
+    super(`'${url} returned ${status}`);
+    this.name = 'ErrorHandler';
+    this.status = status;
   }
+}
+
+const fetcher = async (url: string) => {
+  const response = await fetch(url);
+  console.log(`Status: ${response.status}`);
+  if (response.ok) {
+    return response.json();
+  }
+  throw new ErrorHandler(url, response.status);
 };
 
 export const getProducts = async () => {

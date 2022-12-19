@@ -20,15 +20,19 @@ export interface Props {
 }
 
 export async function getStaticProps() {
-  const { data = {} } = (await getProducts()) || {};
-  return {
-    props: {
-      // Used to override the default header meta tags in /config/seo.json for page-specific
-      // metafields passed as pageProps to the Head component in _app.tsx
-      title: 'Next Shop',
-      products: data,
-    },
-  };
+  try {
+    const { data = {} } = (await getProducts()) || {};
+    return {
+      props: {
+        // Used to override the default header meta tags in /config/seo.json for page-specific
+        // metafields passed as pageProps to the Head component in _app.tsx
+        title: 'Next Shop',
+        products: data,
+      },
+    };
+  } catch (error) {
+    return { notFound: true };
+  }
 }
 
 const Home: FC<Props> = ({ title, products }) => {
