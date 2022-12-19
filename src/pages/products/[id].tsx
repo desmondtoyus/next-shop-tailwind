@@ -34,6 +34,7 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
       id: data?.id || null,
       ...attributes,
     },
+    revalidate: 5 * 60, // seconds
   };
 }
 
