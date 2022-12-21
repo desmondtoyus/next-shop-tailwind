@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { Title } from '@/components/common/Title';
-import { Button } from '@/components/ui/Buttons';
-import Image from 'next/image';
+import ProductCard from '@/components/ui/ProductCard/ProductCard';
 import { getProducts } from '@/helper';
 
 export interface Props {
@@ -40,30 +39,20 @@ const Home: FC<Props> = ({ title, products }) => {
 
   return (
     <>
-      <main className="px-6 py-4">
+      <main className="flex flex-col">
         <Title>Next shop</Title>
-        <div className="flex gap-3 flex-wrap">
-          {products.map((product) => (
-            <div
-              className="border-solid border-2 border-indigo-600 rounded-md p-4 grow shrink basis-1/4 max-w-md"
-              key={product.id}
-            >
-              <h4 className="font-semibold text-center text-3xl pb-2">
-                {product.attributes.name}
-              </h4>
-              <Image
-                src={product.attributes.image_url}
-                width="100"
-                height="100"
-                alt="product.title"
-                className="pb-1 w-full object-cover rounded-lg"
-              />
-              <p className="text-sm leading-6 py-4">
-                {product.attributes.description}
-              </p>
-              <Button cta="Order Now" href={`/products/${product.id}`} />
-            </div>
-          ))}
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 p-4 gap-2">
+          {products.map((product) => {
+            const { attributes } = product;
+            const item = {
+              id: product.id,
+              name: product.attributes.name,
+              imageUrl: attributes.image_url,
+              description: attributes.description,
+              price: attributes.price,
+            };
+            return <ProductCard {...item} key={product.id} />;
+          })}
         </div>
       </main>
     </>
