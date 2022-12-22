@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/Buttons';
 import { Field } from '@/components/ui/Field';
 import { Input } from '@/components/ui/Input';
-import React, { FC } from 'react';
+import React from 'react';
 
 const SignIn = () => {
   return (
