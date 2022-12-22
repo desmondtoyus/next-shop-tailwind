@@ -1,3 +1,4 @@
+import { Button } from '@/components/ui/Buttons';
 import { ErrorHandler, getProduct, getProducts } from '@/helper';
 import { GetStaticPathsResult, GetStaticPropsContext } from 'next';
 import Image from 'next/image';
@@ -9,6 +10,7 @@ export interface ProductProp {
   name: string;
   image_url: string;
   description: string;
+  price: number;
 }
 
 export async function getStaticPaths(): Promise<GetStaticPathsResult> {
@@ -58,17 +60,31 @@ export async function getStaticProps({ params }: GetStaticPropsContext) {
 //   };
 // }
 
-const Product: FC<ProductProp> = ({ id, name, image_url, description }) => {
+const Product: FC<ProductProp> = ({
+  id,
+  name,
+  image_url,
+  description,
+  price,
+}) => {
   return (
-    <div className="p-2 max-w-3xl">
+    <div className="p-2">
       <Link href="/" className="text-blue-300">
         {' '}
         {'<< Back '}
       </Link>
       <>
         <h4 className="text-2xl pb-3">{`${id}. ${name}`}</h4>
-        <Image src={image_url} width="100" height="100" alt={name} />
-        <p>{description}</p>
+        <div className="flex md:flex-col lg:flex-row gap-2">
+          <div>
+            <Image src={image_url} width={640} height={480} alt={name} />
+          </div>
+          <div className="flex flex-col">
+            <p>{description}</p>
+            <p className="py-4">{price}</p>
+            <Button cta="Add to Cart" />
+          </div>
+        </div>
       </>
     </div>
   );

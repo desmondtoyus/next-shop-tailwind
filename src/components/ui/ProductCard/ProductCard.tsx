@@ -31,10 +31,10 @@ const ProductCard: FC<ProductProps> = ({
         className="pb-1 w-full object-cover rounded-lg"
       />
       <div className="flex justify-between">
-        <p className="text-sm leading-6 py-4">{description}</p>
+        <p className="text-sm leading-6 py-4">{name}</p>
         <p className="text-sm leading-6 py-4">{`$${price}`}</p>
       </div>
-      <Button cta="Order Now" href={`/products/${id}`} />
+      <Button cta="See Details" href={`/products/${id}`} />
     </div>
   );
 };
