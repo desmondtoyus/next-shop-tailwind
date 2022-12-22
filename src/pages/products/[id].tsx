@@ -1,5 +1,6 @@
+import { getProduct, getProducts } from '@/apis';
 import { Button } from '@/components/ui/Buttons';
-import { ErrorHandler, getProduct, getProducts } from '@/helper';
+import { ErrorHandler } from '@/helper';
 import { GetStaticPathsResult, GetStaticPropsContext } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';

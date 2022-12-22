@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Title } from '@/components/common/Title';
 import ProductCard from '@/components/ui/ProductCard/ProductCard';
-import { getProducts } from '@/helper';
+import { getProducts } from '@/apis';
 
 export interface Props {
   title: string;
