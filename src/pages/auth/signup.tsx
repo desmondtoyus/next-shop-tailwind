@@ -13,9 +13,9 @@ const SignUp = () => {
     setError(null);
     const requestConfig = {
       ...POST_REQUEST_CONFIG,
-      body: JSON.stringify({ identifier: email, password }),
+      body: JSON.stringify({ username: email, email, password }),
     };
-    const user = await authApi(`/auth/local`, requestConfig);
+    const user = await authApi(`/auth/local/register`, requestConfig);
     const { error } = user;
     if (error) {
       setError(error);
@@ -30,7 +30,7 @@ const SignUp = () => {
         setEmail={setEmail}
         password={password}
         setPassword={setPassword}
-        cta="Login"
+        cta="Signup"
         onSubmit={onSubmit}
         error={error}
       />
