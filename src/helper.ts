@@ -1,5 +1,3 @@
-import { API_ENDPOINT } from './constants';
-
 export class ErrorHandler extends Error {
   status: number | null;
   constructor(url: string, status: number | null) {
@@ -9,8 +7,8 @@ export class ErrorHandler extends Error {
   }
 }
 
-export const fetcher = async (url: string, requestConfig: any | null) => {
-  const response = await fetch(url, requestConfig);
+export const fetcher = async (url: string, options: any | null) => {
+  const response = await fetch(url, options);
   console.log(`Status: ${response.status}`);
   if (response.ok) {
     return response.json();

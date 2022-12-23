@@ -23,9 +23,9 @@ const AuthForm: FC<AuthProps> = ({
   onSubmit,
 }) => {
   return (
-    <>
+    <div className="md:w-96 sm:w-full">
       {error && <span className="text-red-600"> {error} </span>}
-      <form className="md:w-96 sm:w-full" onSubmit={onSubmit}>
+      <form onSubmit={onSubmit}>
         <Field label="Email">
           <Input
             type="text"
@@ -44,7 +44,7 @@ const AuthForm: FC<AuthProps> = ({
         </Field>
         <Button cta={cta} type="submit" />
       </form>
-    </>
+    </div>
   );
 };
 

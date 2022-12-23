@@ -1,9 +1,9 @@
 import { API_ENDPOINT } from './constants';
 import { fetcher } from './helper';
 
-export const authApi = async (url: string, requestConfig: any) => {
+export const authApi = async (url: string, options: any) => {
   try {
-    const user = await fetcher(`${API_ENDPOINT}${url}`, requestConfig);
+    const user = await fetcher(`${API_ENDPOINT}${url}`, options);
     return user;
   } catch (error) {
     return { error: String(error) };
