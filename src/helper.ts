@@ -8,8 +8,18 @@ export class ErrorHandler extends Error {
 }
 
 export const fetcher = async (url: string, options: any | null) => {
-  const response = await fetch(url, options);
-  console.log(`Status: ${response.status}`);
+  const defaultOptions = {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization:
+        typeof window !== 'undefined' &&
+        window?.localStorage?.getItem('userjwt')
+          ? `Bearer ${window?.localStorage?.getItem('userjwt')}`
+          : null,
+    },
+  };
+  const response = await fetch(url, { ...defaultOptions, ...options });
   if (response.ok) {
     return response.json();
   }

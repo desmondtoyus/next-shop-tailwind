@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { AuthForm } from '@/components/ui/Forms';
-import { POST_REQUEST_CONFIG } from '@/constants';
 import { authApi } from '@/apis';
 import Link from 'next/link';
 
@@ -13,7 +12,7 @@ const SignUp = () => {
     e?.preventDefault();
     setError(null);
     const options = {
-      ...POST_REQUEST_CONFIG,
+      method: 'POST',
       body: JSON.stringify({ username: email, email, password }),
     };
     const user = await authApi(`/auth/local/register`, options);

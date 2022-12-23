@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { AuthForm } from '@/components/ui/Forms';
-import { POST_REQUEST_CONFIG } from '@/constants';
 import { authApi } from '@/apis';
 import Link from 'next/link';
 
 const SignIn = () => {
+  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
@@ -15,7 +16,7 @@ const SignIn = () => {
     e?.preventDefault();
     setError(null);
     const options = {
-      ...POST_REQUEST_CONFIG,
+      method: 'POST',
       body: JSON.stringify({ identifier: email, password }),
     };
     const userResponse = await authApi(`/auth/local`, options);
@@ -25,6 +26,8 @@ const SignIn = () => {
     }
     window.localStorage.setItem('userjwt', jwt);
     console.log('onSubmit User = ', user);
+    router.push(`/dashboard`);
+    router.reload();
   };
 
   return (
