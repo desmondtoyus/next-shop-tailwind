@@ -6,6 +6,7 @@ export interface ButtonProps {
   onClick?: (e?: MouseEvent) => void;
   href?: string | null;
   type?: 'button' | 'submit' | 'reset' | undefined;
+  disabled?: boolean;
 }
 
 const Button: FC<ButtonProps> = ({
@@ -13,10 +14,12 @@ const Button: FC<ButtonProps> = ({
   onClick = () => null,
   href = null,
   type = 'button',
+  disabled = false,
 }) => {
   const Btn = () => (
     <button
       type={type}
+      disabled={disabled}
       className="p-2 rounded-md bg-blue-300 text-center text-zinc-50 w-full"
       onClick={() => onClick()}
     >

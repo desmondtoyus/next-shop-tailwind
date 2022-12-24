@@ -9,6 +9,7 @@ export interface AuthProps {
   cta?: string;
   error?: string | null;
   success?: boolean;
+  isLoading?: boolean;
   setEmail: (value: string) => void;
   setPassword: (value: string) => void;
   onSubmit: (e?: React.FormEvent) => void;
@@ -20,13 +21,14 @@ const AuthForm: FC<AuthProps> = ({
   password,
   cta = 'Sign Up',
   success = false,
+  isLoading = false,
   setPassword,
   setEmail,
   onSubmit,
 }) => {
   return (
     <div className="md:w-96 sm:w-full">
-      {error && <span className="text-red-600"> {error} </span>}
+      {error && <span className="text-red-600"> {String(error)} </span>}
       <form onSubmit={onSubmit}>
         <Field label="Email">
           <Input
@@ -44,7 +46,7 @@ const AuthForm: FC<AuthProps> = ({
             required={true}
           />
         </Field>
-        <Button cta={cta} type="submit" />
+        <Button cta={cta} type="submit" disabled={isLoading} />
       </form>
       {success && (
         <span className="text-blue-600"> Account created successfully </span>

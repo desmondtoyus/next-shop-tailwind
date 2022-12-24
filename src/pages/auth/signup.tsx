@@ -1,32 +1,32 @@
 import React, { useState } from 'react';
+import useSWRMutation from 'swr/mutation';
 import { AuthForm } from '@/components/ui/Forms';
-import { authApi } from '@/apis';
 import Link from 'next/link';
+import { fetcher } from '@/helper';
+import { API_ENDPOINT } from '@/constants';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
 
-  const onSubmit = async (e?: React.FormEvent) => {
-    e?.preventDefault();
-    setError(null);
+  const logoutUser = async (url: string, { arg }: any) => {
+    const { email, password } = arg;
     const options = {
       method: 'POST',
       body: JSON.stringify({ username: email, email, password }),
     };
-    const { error, user } =
-      (await authApi(`/auth/local/register`, options)) || {};
-    console.log('user == ', user);
-    if (error) {
-      return setError(error);
-    }
+    const { user } = await fetcher(url, options);
     if (user) {
       return setSuccess(!!user);
     }
     console.log('onSubmit User = ', user);
   };
+
+  const { trigger, error, isMutating } = useSWRMutation(
+    `${API_ENDPOINT}/auth/local/register`,
+    logoutUser,
+  );
 
   return (
     <div className="p-6">
@@ -36,9 +36,13 @@ const SignUp = () => {
         password={password}
         setPassword={setPassword}
         cta="Signup"
-        onSubmit={onSubmit}
+        onSubmit={(e) => {
+          e?.preventDefault();
+          trigger({ email, password });
+        }}
         error={error}
         success={success}
+        isLoading={isMutating}
       />
       <Link href="/auth/signin" className="text-blue-300 underline text-center">
         Signin
