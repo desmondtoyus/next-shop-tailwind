@@ -28,6 +28,11 @@ const SignUp = () => {
     logoutUser,
   );
 
+  const onSubmit = (e?: React.FormEvent) => {
+    e?.preventDefault();
+    trigger({ email, password }, { rollbackOnError: true });
+  };
+
   return (
     <div className="p-6">
       <AuthForm
@@ -36,10 +41,7 @@ const SignUp = () => {
         password={password}
         setPassword={setPassword}
         cta="Signup"
-        onSubmit={(e) => {
-          e?.preventDefault();
-          trigger({ email, password });
-        }}
+        onSubmit={onSubmit}
         error={error}
         success={success}
         isLoading={isMutating}
