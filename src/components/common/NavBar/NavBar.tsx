@@ -1,15 +1,12 @@
 import Link from 'next/link';
 import React from 'react';
-import useSWR from 'swr';
 import { useRouter } from 'next/router';
-import { API_ENDPOINT } from '@/constants';
-import { isUserJWTAvailable } from '@/helper';
+import { useUser } from '@/hooks/useUser';
 
 const Navbar = () => {
   const router = useRouter();
-  const { data } = useSWR(
-    isUserJWTAvailable() ? `${API_ENDPOINT}/users/me` : '',
-  );
+  const data = useUser();
+
   console.log('data == ', data);
 
   const onSignOut = async (e?: React.FormEvent) => {
