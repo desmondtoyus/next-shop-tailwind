@@ -3,14 +3,14 @@ import React from 'react';
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
 import { API_ENDPOINT } from '@/constants';
-import { fetcher, isUserJWTAvailable } from '@/helper';
+import { isUserJWTAvailable } from '@/helper';
 
 const Navbar = () => {
   const router = useRouter();
   const { data } = useSWR(
     isUserJWTAvailable() ? `${API_ENDPOINT}/users/me` : '',
-    fetcher,
   );
+  console.log('data == ', data);
 
   const onSignOut = async (e?: React.FormEvent) => {
     e?.preventDefault();
