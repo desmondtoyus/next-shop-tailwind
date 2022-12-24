@@ -7,16 +7,17 @@ export class ErrorHandler extends Error {
   }
 }
 
+export const isUserJWTAvailable = () =>
+  typeof window !== 'undefined' && window?.localStorage?.getItem('userjwt');
+
 export const fetcher = async (url: string, options: any | null) => {
   const defaultOptions = {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      Authorization:
-        typeof window !== 'undefined' &&
-        window?.localStorage?.getItem('userjwt')
-          ? `Bearer ${window?.localStorage?.getItem('userjwt')}`
-          : null,
+      Authorization: isUserJWTAvailable()
+        ? `Bearer ${window?.localStorage?.getItem('userjwt')}`
+        : null,
     },
   };
   const response = await fetch(url, { ...defaultOptions, ...options });

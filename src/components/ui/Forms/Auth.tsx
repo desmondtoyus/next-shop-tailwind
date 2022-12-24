@@ -8,6 +8,7 @@ export interface AuthProps {
   password: string;
   cta?: string;
   error?: string | null;
+  success?: boolean;
   setEmail: (value: string) => void;
   setPassword: (value: string) => void;
   onSubmit: (e?: React.FormEvent) => void;
@@ -18,6 +19,7 @@ const AuthForm: FC<AuthProps> = ({
   error = null,
   password,
   cta = 'Sign Up',
+  success = false,
   setPassword,
   setEmail,
   onSubmit,
@@ -44,6 +46,9 @@ const AuthForm: FC<AuthProps> = ({
         </Field>
         <Button cta={cta} type="submit" />
       </form>
+      {success && (
+        <span className="text-blue-600"> Account created successfully </span>
+      )}
     </div>
   );
 };

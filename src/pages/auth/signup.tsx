@@ -7,6 +7,7 @@ const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
 
   const onSubmit = async (e?: React.FormEvent) => {
     e?.preventDefault();
@@ -15,10 +16,14 @@ const SignUp = () => {
       method: 'POST',
       body: JSON.stringify({ username: email, email, password }),
     };
-    const user = await authApi(`/auth/local/register`, options);
-    const { error } = user;
+    const { error, user } =
+      (await authApi(`/auth/local/register`, options)) || {};
+    console.log('user == ', user);
     if (error) {
-      setError(error);
+      return setError(error);
+    }
+    if (user) {
+      return setSuccess(!!user);
     }
     console.log('onSubmit User = ', user);
   };
@@ -33,6 +38,7 @@ const SignUp = () => {
         cta="Signup"
         onSubmit={onSubmit}
         error={error}
+        success={success}
       />
       <Link href="/auth/signin" className="text-blue-300 underline text-center">
         Signin

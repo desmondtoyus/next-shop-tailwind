@@ -3,18 +3,19 @@ import React from 'react';
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
 import { API_ENDPOINT } from '@/constants';
-import { fetcher } from '@/helper';
+import { fetcher, isUserJWTAvailable } from '@/helper';
 
 const Navbar = () => {
   const router = useRouter();
-  console.log('router == ', router);
-  const { data } = useSWR(`${API_ENDPOINT}/users/me`, fetcher);
-  console.log('data == ', data);
+  const { data } = useSWR(
+    isUserJWTAvailable() ? `${API_ENDPOINT}/users/me` : '',
+    fetcher,
+  );
 
   const onSignOut = async (e?: React.FormEvent) => {
     e?.preventDefault();
     window.localStorage.removeItem('userjwt');
-    router.reload();
+    router.push('/');
   };
 
   return (

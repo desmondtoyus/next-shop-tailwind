@@ -27,7 +27,6 @@ const SignIn = () => {
     window.localStorage.setItem('userjwt', jwt);
     console.log('onSubmit User = ', user);
     router.push(`/dashboard`);
-    router.reload();
   };
 
   return (
