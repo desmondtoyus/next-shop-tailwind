@@ -11,16 +11,20 @@ const SignUp = () => {
   const [success, setSuccess] = useState(false);
 
   const logoutUser = async (url: string, { arg }: any) => {
-    const { email, password } = arg;
-    const options = {
-      method: 'POST',
-      body: JSON.stringify({ username: email, email, password }),
-    };
-    const { user } = await fetcher(url, options);
-    if (user) {
-      return setSuccess(!!user);
+    try {
+      const { email, password } = arg;
+      const options = {
+        method: 'POST',
+        body: JSON.stringify({ username: email, email, password }),
+      };
+      const { user } = await fetcher(url, options);
+      if (user) {
+        return setSuccess(!!user);
+      }
+      console.log('onSubmit User = ', user);
+    } catch (error) {
+      console.error(`Error Happen: ${error}`);
     }
-    console.log('onSubmit User = ', user);
   };
 
   const { trigger, error, isMutating } = useSWRMutation(

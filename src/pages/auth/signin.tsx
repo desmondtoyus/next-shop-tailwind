@@ -26,7 +26,7 @@ const SignIn = () => {
         router.push(`/dashboard`);
       }
     } catch (error) {
-      throw new Error(String(error));
+      console.error(`Error Happen: ${error}`);
     }
   }
 
