@@ -49,7 +49,10 @@ const AuthForm: FC<AuthProps> = ({
         <Button cta={cta} type="submit" disabled={isLoading} />
       </form>
       {success && (
-        <span className="text-blue-600"> Account created successfully </span>
+        <span className="text-blue-600">
+          {' '}
+          Account created successfully, Sign In{' '}
+        </span>
       )}
     </div>
   );

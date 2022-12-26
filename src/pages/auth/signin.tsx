@@ -1,45 +1,37 @@
 import React, { useState } from 'react';
-import useSWRMutation from 'swr/mutation';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { AuthForm } from '@/components/ui/Forms';
-import { fetcher } from '@/helper';
+import { useSignInOrSignOut } from '@/hooks/useUser';
 
 const SignIn = () => {
   const router = useRouter();
   const [email, setEmail] = useState('');
+  const [err, setErr] = useState('');
   const [password, setPassword] = useState('');
 
-  async function loginUser(url: string, { arg }: any) {
+  const { trigger, error, isMutating } = useSignInOrSignOut('/auth/local');
+
+  console.log('isMutating == ', isMutating);
+  console.log('error == ', error);
+
+  const onSubmit = async (e?: React.FormEvent) => {
     try {
-      const { email, password } = arg;
-      const options = {
-        method: 'POST',
-        body: JSON.stringify({ identifier: email, password }),
-      };
-      const { jwt } = await fetcher(url, options);
+      e?.preventDefault();
+      const { jwt } = await trigger(
+        { identifier: email, password },
+        {
+          rollbackOnError: true,
+        },
+      );
       if (jwt) {
         window.localStorage.setItem('userjwt', jwt);
-        router.push(`/dashboard`);
+        return router.push(`/dashboard`);
       }
-    } catch (error) {
-      console.error(`Error Happen: ${error}`);
+      return setErr('Signin unsuccessful');
+    } catch (err) {
+      return setErr(String(err));
     }
-  }
-
-  const { error, isMutating, trigger } = useSWRMutation(
-    `${process.env.NEXT_PUBLIC_CMS_URL}/auth/local`,
-    loginUser,
-  );
-
-  const onSubmit = (e?: React.FormEvent) => {
-    e?.preventDefault();
-    trigger(
-      { email, password },
-      {
-        rollbackOnError: true,
-      },
-    );
   };
 
   return (

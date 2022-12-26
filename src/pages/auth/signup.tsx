@@ -1,39 +1,34 @@
 import React, { useState } from 'react';
-import useSWRMutation from 'swr/mutation';
 import { AuthForm } from '@/components/ui/Forms';
 import Link from 'next/link';
-import { fetcher } from '@/helper';
+import { useSignInOrSignOut } from '@/hooks/useUser';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [err, setErr] = useState('');
   const [success, setSuccess] = useState(false);
-
-  const logoutUser = async (url: string, { arg }: any) => {
-    try {
-      const { email, password } = arg;
-      const options = {
-        method: 'POST',
-        body: JSON.stringify({ username: email, email, password }),
-      };
-      const { user } = await fetcher(url, options);
-      if (user) {
-        return setSuccess(!!user);
-      }
-      console.log('onSubmit User = ', user);
-    } catch (error) {
-      console.error(`Error Happen: ${error}`);
-    }
-  };
-
-  const { trigger, error, isMutating } = useSWRMutation(
-    `${process.env.NEXT_PUBLIC_CMS_URL}/auth/local/register`,
-    logoutUser,
+  const { trigger, error, isMutating } = useSignInOrSignOut(
+    '/auth/local/register',
   );
 
-  const onSubmit = (e?: React.FormEvent) => {
-    e?.preventDefault();
-    trigger({ email, password }, { rollbackOnError: true });
+  const onSubmit = async (e?: React.FormEvent) => {
+    try {
+      e?.preventDefault();
+      setSuccess(false);
+      const { jwt } = await trigger(
+        { email, password, username: email },
+        {
+          rollbackOnError: true,
+        },
+      );
+      if (jwt) {
+        setSuccess(true);
+      }
+      return setErr('Signup unsuccessful');
+    } catch (err) {
+      return setErr(String(err));
+    }
   };
 
   return (
@@ -45,7 +40,7 @@ const SignUp = () => {
         setPassword={setPassword}
         cta="Signup"
         onSubmit={onSubmit}
-        error={error}
+        error={error || err}
         success={success}
         isLoading={isMutating}
       />
