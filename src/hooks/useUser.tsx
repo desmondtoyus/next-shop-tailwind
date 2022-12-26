@@ -10,7 +10,7 @@ export const useUser = () => {
 };
 
 export const useSignInOrSignUp = (endpoint: string) => {
-  const loginUser = async (url: string, { arg }: any) => {
+  const loginUser = async (url: string, { arg = {} }: any) => {
     try {
       const options = {
         method: 'POST',

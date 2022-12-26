@@ -84,3 +84,16 @@ POST /auth/local/register
 "email":
 "password"
 }
+
+<!-- cart items -->
+
+GET /cart-items
+Authorization
+
+POST /cart-items
+Authorization
+Content-Type
+Body{
+product: // product id
+quantity: // number
+}
