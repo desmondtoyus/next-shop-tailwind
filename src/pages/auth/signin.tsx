@@ -4,14 +4,11 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { AuthForm } from '@/components/ui/Forms';
 import { fetcher } from '@/helper';
-import { API_ENDPOINT } from '@/constants';
 
 const SignIn = () => {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  // console.log('CMS URL = ', process.env.NEXT_PUBLIC_CMS_URL);
 
   async function loginUser(url: string, { arg }: any) {
     try {
@@ -31,7 +28,7 @@ const SignIn = () => {
   }
 
   const { error, isMutating, trigger } = useSWRMutation(
-    `${API_ENDPOINT}/auth/local`,
+    `${process.env.NEXT_PUBLIC_CMS_URL}/auth/local`,
     loginUser,
   );
 

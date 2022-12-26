@@ -1,10 +1,9 @@
 import useSWR from 'swr';
-import { API_ENDPOINT } from '@/constants';
 import { isUserJWTAvailable } from '@/helper';
 
 export const useUser = () => {
   const { data } = useSWR(
-    isUserJWTAvailable() ? `${API_ENDPOINT}/users/me` : '',
+    isUserJWTAvailable() ? `${process.env.NEXT_PUBLIC_CMS_URL}/users/me` : '',
   );
   return data;
 };

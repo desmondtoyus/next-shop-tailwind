@@ -3,7 +3,6 @@ import useSWRMutation from 'swr/mutation';
 import { AuthForm } from '@/components/ui/Forms';
 import Link from 'next/link';
 import { fetcher } from '@/helper';
-import { API_ENDPOINT } from '@/constants';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
@@ -28,7 +27,7 @@ const SignUp = () => {
   };
 
   const { trigger, error, isMutating } = useSWRMutation(
-    `${API_ENDPOINT}/auth/local/register`,
+    `${process.env.NEXT_PUBLIC_CMS_URL}/auth/local/register`,
     logoutUser,
   );
 
