@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { AuthForm } from '@/components/ui/Forms';
 import Link from 'next/link';
-import { useSignInOrSignOut } from '@/hooks/useUser';
+import { useSignInOrSignUp } from '@/hooks/useUser';
 
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [err, setErr] = useState('');
   const [success, setSuccess] = useState(false);
-  const { trigger, error, isMutating } = useSignInOrSignOut(
+  const { trigger, error, isMutating } = useSignInOrSignUp(
     '/auth/local/register',
   );
 

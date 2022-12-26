@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { AuthForm } from '@/components/ui/Forms';
-import { useSignInOrSignOut } from '@/hooks/useUser';
+import { useSignInOrSignUp } from '@/hooks/useUser';
 
 const SignIn = () => {
   const router = useRouter();
@@ -10,7 +10,7 @@ const SignIn = () => {
   const [err, setErr] = useState('');
   const [password, setPassword] = useState('');
 
-  const { trigger, error, isMutating } = useSignInOrSignOut('/auth/local');
+  const { trigger, error, isMutating } = useSignInOrSignUp('/auth/local');
 
   console.log('isMutating == ', isMutating);
   console.log('error == ', error);

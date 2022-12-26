@@ -9,7 +9,7 @@ export const useUser = () => {
   return data;
 };
 
-export const useSignInOrSignOut = (endpoint: string) => {
+export const useSignInOrSignUp = (endpoint: string) => {
   const loginUser = async (url: string, { arg }: any) => {
     try {
       const options = {
